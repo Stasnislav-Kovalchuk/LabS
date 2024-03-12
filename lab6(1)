@@ -1,0 +1,66 @@
+"""
+This is lab5
+"""
+class Smartphone:
+    """
+    This is class where write my parameter
+    """
+    def __init__(self, price, model, phone_number, memory):
+        self.price = price
+        self.model = model
+        self.phone_number = phone_number
+        self.memory = memory
+
+    def __str__(self):
+        """
+        This is method str
+        """
+        return f"{self.price}, {self.model}, {self.phone_number}, {self.memory}"
+
+    def see_price(self):
+        """
+        this function return my phone price
+        """
+        return f"Phone price: {self.price}"
+
+
+class PhoneStore:
+    """
+    this class where my phones
+    """
+
+    def __init__(self):
+        """
+        This function print my inventory
+        """
+        self.inventory = []
+
+    def add_phone(self, smartphone):
+        """
+        This function append smartphone to inventory
+        """
+        self.inventory.append(smartphone)
+
+    def find_best_phone(self, max_budget):
+        """
+        This function find best phone
+        """
+        best_phone = None
+        for phone in self.inventory:
+            if phone.price <= max_budget and (best_phone is None or phone.price > best_phone.price):
+                best_phone = phone
+        return best_phone
+
+    def get_phone_numbers(self):
+        """
+        This function returned my phone number inventory
+        """
+        return [phone.phone_number for phone in self.inventory]
+
+    def list_phones_sorted_by_price(self):
+        """
+        This function sort my phone to price
+        """
+        self.inventory.sort(key=lambda p: p.price)
+        for phone in self.inventory:
+            print(f"Smartphone: {phone}")

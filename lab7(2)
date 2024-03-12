@@ -1,0 +1,37 @@
+from lab7 import Smartphone, PhoneStore
+
+if __name__ == "__main__":
+    phone_1 = Smartphone(400, "Iphone11",
+                         "099-222-46-93", 64)
+    phone_2 = Smartphone(600, "Iphone12",
+                         "099-333-46-93", 128)
+    phone_3 = Smartphone(550, "Iphone13",
+                         "099-444-46-93", 256)
+    phone_4 = Smartphone(700, "Iphone14",
+                         "099-555-46-93", 512)
+    phone_store = PhoneStore()
+
+    phone_store.add_phone(phone_1)
+    phone_store.add_phone(phone_2)
+    phone_store.add_phone(phone_3)
+    phone_store.add_phone(phone_4)
+
+    phone_store.add_phone(phone_4)
+
+    phone_numbers = PhoneStore.get_phone_numbers(phone_store)
+    print("\nList of phone numbers:")
+    print(phone_numbers)
+
+    print("\nList of phones sorted by price:")
+    PhoneStore.list_phones_sorted_by_price(phone_store)
+
+    MAX_BUDGET = 650
+
+    best_phone = phone_store.find_best_phone(MAX_BUDGET)
+
+    if best_phone:
+        print()
+        print(f"The best phone within a budget of ${MAX_BUDGET} is:")
+        print(best_phone)
+    else:
+        print(f"No phones are available within a budget of ${MAX_BUDGET}")

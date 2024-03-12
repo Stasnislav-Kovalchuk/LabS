@@ -1,0 +1,45 @@
+class Conference:
+    def __init__(self, name, participants, ticket_price, city, meeting_time, theme) -> None:
+        self.__name = name
+        self.__participants = participants
+        self.__ticket_price = ticket_price
+        self.__city = city
+        self.meeting_time = meeting_time
+        self.theme = theme
+
+    def get_name(self):
+        return self.__name
+
+    def get_participants(self):
+        return self.__participants
+
+    def get_ticket_price(self):
+        return self.__ticket_price
+
+    def get_city(self):
+        return self.__city
+
+    def __str__(self):
+        return f"Con1({self.__name}, participants={self.__participants}, ticket_price={self.__ticket_price}, city={self.__city}, meeting_time={self.meeting_time}, theme={self.theme})"
+
+    def __repr__(self):
+        return f"Con1({self.__name}, participants={self.__participants}, ticket_price={self.__ticket_price}, city={self.__city}, meeting_time={self.meeting_time}, theme={self.theme})"
+
+    def __del__(self):
+        print("Destructor is called")
+
+
+def main():
+    conference1 = Conference("PyCon Ukraine", 149, "100$", "Львів", 10, "IoT")
+    conference2 = Conference("Hello World", 231, "100$", "Буськ", 11, "IT")
+    conference3 = Conference("MicrosoftCon", 10000, "1000$", "Вашингтон", 12, "New_Google_Phone")
+
+    print(conference1)
+    print(conference2)
+    print(conference3)
+
+if __name__ == "__main__":
+    main()
+
+
+

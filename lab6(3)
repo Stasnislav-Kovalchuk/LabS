@@ -1,0 +1,86 @@
+"""
+Testing Modul
+"""
+
+
+import pytest
+from lab6 import Smartphone, PhoneStore
+
+#Done
+@pytest.fixture(name="smartphone")
+def smartphone_fixture():
+    """
+    This test verify correct initialization
+    """
+    return Smartphone(500, "Iphone 14", "1234567890", 128)
+
+#Done
+@pytest.fixture(name="phone_store")
+def phone_store_fixture():
+    """
+    Validate the str method representation of Smartphone objects.
+    """
+    phone_store = PhoneStore()
+    phone_store.add_phone(Smartphone(500, "Iphone 14", "1234567890", 128))
+    return phone_store
+
+#Done
+def test_phone_store_add_phone_method(phone_store):
+    """
+    Ensure the correct addition of smartphones to the PhoneStore inventory.
+    """
+    new_phone = Smartphone(500, "Iphone 14", "1234567890", 128)
+    new_phone1 = Smartphone(550, "Iphone 13", "1234567890", 128)
+
+    phone_store.add_phone(new_phone)
+    phone_store.add_phone(new_phone1)
+
+    assert len(phone_store.inventory) == 3
+
+#Done
+def test_phone_store_find_best_phone_method(phone_store):
+    """
+    Verify the identification of the best smartphone within a given budget.
+    """
+    new_phone1 = Smartphone(500, "Iphone 14", "1234567890", 128)
+    new_phone2 = Smartphone(500, "Iphone 12", "1234567890", 128)
+    new_phone3 = Smartphone(500, "Iphone 13", "1234567890", 128)
+
+    phone_store.add_phone(new_phone1)
+    phone_store.add_phone(new_phone2)
+    phone_store.add_phone(new_phone3)
+
+    best_phone = phone_store.find_best_phone(400)
+    assert best_phone is None
+
+
+def test_phone_store_get_phone_numbers_method(phone_store):
+    """
+    Validate the retrieval of all phone numbers in the PhoneStore inventory.
+    """
+    assert '1234567890' in phone_store.get_phone_numbers()
+
+#Done
+def test_phone_store_list_phones_sorted_by_price_method():
+    """
+    Verify the sorting of smartphones in the PhoneStore inventory by price.
+    """
+    # Should contain 3 phone and check
+    phone_store = PhoneStore()
+    new_phone4 = Smartphone(500, "Iphone 14", "1234567890", 128)
+    new_phone5 = Smartphone(300, "Iphone 12", "1234567890", 128)
+    new_phone6 = Smartphone(600, "Iphone 13", "1234567890", 128)
+
+    phone_store.add_phone(new_phone4)
+    phone_store.add_phone(new_phone5)
+    phone_store.add_phone(new_phone6)
+
+    phone_store.list_phones_sorted_by_price()
+
+    assert phone_store.inventory[0] == new_phone5
+    assert phone_store.inventory[1] == new_phone4
+    assert phone_store.inventory[2] == new_phone6
+
+
+if __name__ == "__main__":
+    pytest.main()
